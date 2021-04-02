@@ -11,7 +11,6 @@ const OUTPUT_DIR = path.resolve(__dirname, "output")
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 
-
 function manager() {
   inquirer
     .prompt([
@@ -31,7 +30,13 @@ function manager() {
         type: 'input',
         message: 'What is the team managers email address?',
         name: 'managerEmail',
-        // validate: validatePrompts,
+        validate: function(email) {
+          if (email = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(email) ) {
+            return true
+            } else {
+              return "Please enter a valid email"
+          }
+        } 
       },
       {
         type: 'input',
@@ -101,8 +106,13 @@ function engineerPrompt() {
       type: 'input',
       message: 'What is the engineers email address?',
       name: 'engineerEmail',
-      //   validate: validatePrompts,
-      // when: (answers) => answers.newMember === 'Engineer'
+      validate: function(email) {
+          if (email = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(email) ) {
+            return true
+            } else {
+              return "Please enter a valid email"
+          }
+        } 
     },
     {
       type: 'input',
@@ -142,8 +152,13 @@ function internPrompt() {
       type: 'input',
       message: 'What is the interns email address?',
       name: 'internEmail',
-      //   validate: validatePrompts,
-      // when: (answers) => answers.newMember === 'Intern'
+      validate: function(email) {
+          if (email = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(email) ) {
+            return true
+            } else {
+              return "Please enter a valid email"
+          }
+        } 
     },
     {
       type: 'input',
