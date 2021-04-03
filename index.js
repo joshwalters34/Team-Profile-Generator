@@ -10,7 +10,7 @@ const path = require('path');
 const OUTPUT_DIR = path.resolve(__dirname, "output")
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
-
+// function to start the inquirer prompts for the manager
 function manager() {
   inquirer
     .prompt([
@@ -18,18 +18,17 @@ function manager() {
         type: 'input',
         message: 'What is the team managers name?',
         name: 'managerName',
-        // validate: validatePrompts,
       },
       {
         type: 'input',
         message: 'What is the team managers employee id?',
         name: 'managerID',
-        // validate: validatePrompts,
       },
       {
         type: 'input',
         message: 'What is the team managers email address?',
         name: 'managerEmail',
+        // validating that an email address is entered.  
         validate: function(email) {
           if (email = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(email) ) {
             return true
@@ -42,7 +41,6 @@ function manager() {
         type: 'input',
         message: 'What is the team managers office number?',
         name: 'managerOffice',
-        //   validate: validatePrompts,
       },
 
     ])
@@ -50,11 +48,9 @@ function manager() {
       const manager = new Manager(response.managerName, response.managerID, response.managerEmail, response.managerOffice);
       teamMembers.push(manager);
       newMemberPrompt()
-        // , (err) =>
-        //   err ? console.log(err) : console.log("HTML generated")
     })
 }
-
+// prompt to ask if user wants to add more team members or if they're done.  This is called in each of the member functions
 function newMemberPrompt() {
 
   inquirer.prompt([
@@ -66,8 +62,6 @@ function newMemberPrompt() {
     },
   ])
     .then((response) => {
-      // const employee = new Employee(response.newMember);
-      // teamMembers.push(employee);
       switch (response.newMember) {
         case 'Engineer':
           engineerPrompt();
@@ -79,33 +73,27 @@ function newMemberPrompt() {
 
         default:
           fs.writeFileSync(outputPath, generateTeam(teamMembers))
-          // break;
       }
-      // , (err) =>
-      // err ? console.log(err) : console.log("HTML generated")
     })
 }
-
+// function for new engineer prompts
 function engineerPrompt() {
   inquirer.prompt([
     {
       type: 'input',
       message: 'What is the engineers name?',
       name: 'engineerName',
-      //   validate: validatePrompts,
-      // when: (answers) => answers.newMember === 'Engineer'
     },
     {
       type: 'input',
       message: 'What is the engineers ID?',
       name: 'engineerID',
-      //   validate: validatePrompts,
-      // when: (answers) => answers.newMember === 'Engineer'
     },
     {
       type: 'input',
       message: 'What is the engineers email address?',
       name: 'engineerEmail',
+      // validating that an email address is entered. 
       validate: function(email) {
           if (email = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(email) ) {
             return true
@@ -118,8 +106,6 @@ function engineerPrompt() {
       type: 'input',
       message: 'What is the engineers GitHub username',
       name: 'engineerGit',
-      //   validate: validatePrompts,
-      // when: (answers) => answers.newMember === 'Engineer'
     },
 
   ])
@@ -127,31 +113,26 @@ function engineerPrompt() {
       const engineer = new Engineer(response.engineerName, response.engineerID, response.engineerEmail, response.engineerGit);
       teamMembers.push(engineer);
       newMemberPrompt()
-        // , (err) =>
-        //   err ? console.log(err) : console.log("HTML generated")
     })
 }
-
+// function for new engineer prompt
 function internPrompt() {
   inquirer.prompt([
     {
       type: 'input',
       message: 'What is the interns name?',
       name: 'internName',
-      //   validate: validatePrompts,
-      // when: (answers) => answers.newMember === 'Intern'
     },
     {
       type: 'input',
       message: 'What is the interns ID?',
       name: 'internID',
-      //   validate: validatePrompts,
-      // when: (answers) => answers.newMember === 'Intern'
     },
     {
       type: 'input',
       message: 'What is the interns email address?',
       name: 'internEmail',
+      // validating that an email address is entered. 
       validate: function(email) {
           if (email = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(email) ) {
             return true
@@ -164,17 +145,13 @@ function internPrompt() {
       type: 'input',
       message: 'What school does the intern attend?',
       name: 'internSchool',
-      //   validate: validatePrompts,
-      // when: (answers) => answers.newMember === 'Intern'
     },
   ])
     .then(response => {
       const intern = new Intern(response.internName, response.internID, response.internEmail, response.internSchool);
       teamMembers.push(intern);
       newMemberPrompt()
-        // , (err) =>
-        //   err ? console.log(err) : console.log("HTML generated")
     });
 }
-
+// call the manager function to start inquirer prompts
 manager();
