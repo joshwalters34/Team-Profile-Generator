@@ -15,7 +15,7 @@ My motivation for this project was to create an easy way for users to create a t
 View my [GitHub_Repository](https://github.com/joshwalters34/Team-Profile-Generator)
 
 ### Project walkthrough
-View my project [walkthrough](https://drive.google.com/drive/folders/1aj97SSqq0TZE6O4dIK80B7njTluCH--j)
+View my project [walkthrough](https://drive.google.com/file/d/1bZcDD32dgNv2eAl578XjPvBQHaYWLr70/view?usp=sharing)
 
 ### Installation Instruction
 To install necessary packages, please run the following command
